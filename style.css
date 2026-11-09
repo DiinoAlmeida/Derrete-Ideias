@@ -4,10 +4,10 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 :root[data-theme="dark"]{--bg:#1f2a36;--surface:#2a3846;--text:#e5e7ea;--muted:#9fb0c2;--border:#3f5166;--accent:#86b6f0;--on-accent:#1f2a36}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
-header{padding:2.5rem 1.25rem 1rem;max-width:960px;margin:0 auto}
-.marca{display:flex;align-items:center;gap:.9rem}.marca img{height:160px;width:160px;max-width:40vw;max-height:40vw;border-radius:16px}
-h1{margin:0;font-size:1.8rem;font-family:Georgia,serif;font-style:italic}
-header p{margin:0;color:var(--muted)}
+header{background:#e5e7ea;color:#3f5166;margin-bottom:1rem}
+.brand{display:flex;align-items:center;gap:1rem;max-width:960px;margin:0 auto;padding-right:1.25rem}.brand img{height:220px;max-width:40vw;object-fit:contain}
+h1{margin:0;font-size:clamp(1.5rem,5vw,2.2rem);font-family:Georgia,serif;font-style:italic}
+header p{margin:.3rem 0 0;color:#62788f;letter-spacing:.3em;font:600 .8rem system-ui,sans-serif}
 nav{display:flex;gap:.5rem;flex-wrap:wrap;max-width:960px;margin:0 auto;padding:.5rem 1.25rem 1rem}
 nav button{border:1px solid var(--border);background:var(--surface);color:var(--text);padding:.4rem .9rem;border-radius:999px;font:inherit;cursor:pointer}
 nav button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
@@ -18,15 +18,16 @@ main{max-width:960px;margin:0 auto;padding:0 1.25rem 2rem}
 .info{padding:.9rem;display:flex;flex-direction:column;gap:.25rem;flex:1}
 .info h3{margin:0;font-size:1rem}
 .info small{color:var(--muted)}
-.desc{margin:.25rem 0 0;color:var(--muted);font-size:.9rem}.info small:last-child{margin-top:auto;padding-top:.5rem}
+.description{margin:.25rem 0 0;color:var(--muted);font-size:.9rem}.info small:last-child{margin-top:auto;padding-top:.5rem}
 .info a{margin-top:.5rem;text-align:center;border:1px solid var(--border);border-radius:8px;padding:.4rem;color:var(--text);text-decoration:none;font-size:.9rem}
 .card{cursor:pointer}.card:hover{border-color:var(--accent)}
 dialog{border:1px solid var(--border);border-radius:16px;padding:0;max-width:340px;width:calc(100% - 2.5rem);background:var(--surface);color:var(--text)}
 dialog::backdrop{background:rgba(0,0,0,.5)}
 .dlg .thumb{aspect-ratio:16/10}
-.dlg .corpo{padding:1.1rem;display:flex;flex-direction:column;gap:.4rem}
+.dlg .body{padding:1.1rem;display:flex;flex-direction:column;gap:.4rem}
 .dlg h2{margin:0;font-size:1.25rem}
-.btn-ig{display:block;text-align:center;background:var(--accent);color:var(--on-accent);text-decoration:none;padding:.7rem;border-radius:10px;font-weight:600;margin-top:.6rem}
-.btn-mail{display:block;text-align:center;border:1px solid var(--accent);color:var(--accent);text-decoration:none;padding:.7rem;border-radius:10px;font-weight:600}
-.fechar{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:.4rem}
+.btn-instagram{display:block;text-align:center;background:var(--accent);color:var(--on-accent);text-decoration:none;padding:.7rem;border-radius:10px;font-weight:600;margin-top:.6rem}
+.btn-email{display:block;text-align:center;border:1px solid var(--accent);color:var(--accent);text-decoration:none;padding:.7rem;border-radius:10px;font-weight:600}
+.close{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:.4rem}
+.ig{display:inline-flex;vertical-align:middle;margin-left:.5rem;color:var(--accent)}
 footer{text-align:center;color:var(--muted);font-size:.85rem;padding:1.5rem}

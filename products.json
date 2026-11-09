@@ -1,0 +1,10 @@
+[
+  {"name": "Caneca de cerâmica", "category": "Casa", "image": "img/caneca.svg", "description": "Caneca feita à mão, ideal para o café ou chá da manhã."},
+  {"name": "Vela aromática", "category": "Casa", "image": "img/vela.svg", "description": "Vela de cera natural com aroma suave e duradouro."},
+  {"name": "Planta suculenta", "category": "Casa", "image": "img/planta.svg", "description": "Pequena suculenta de fácil manutenção, em vaso decorativo."},
+  {"name": "Caderno A5", "category": "Papelaria", "image": "img/caderno.svg", "description": "Caderno A5 de capa dura com folhas pautadas."},
+  {"name": "Conjunto de canetas", "category": "Papelaria", "image": "img/canetas.svg", "description": "Conjunto de canetas de escrita suave em várias cores."},
+  {"name": "Tote bag", "category": "Acessórios", "image": "img/tote-bag.svg", "description": "Saco de algodão resistente para o dia a dia."},
+  {"name": "Porta-chaves", "category": "Acessórios", "image": "img/porta-chaves.svg", "description": "Porta-chaves personalizado, leve e prático."},
+  {"name": "Meias às riscas", "category": "Acessórios", "image": "img/meias.svg", "description": "Meias de algodão confortáveis com padrão às riscas."}
+]
