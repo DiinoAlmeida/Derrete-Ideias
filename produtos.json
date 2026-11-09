@@ -1,10 +1,10 @@
 [
-  {"nome": "Caneca de cerâmica", "cat": "Casa", "preco": 12.9, "imagem": "img/caneca.svg"},
-  {"nome": "Vela aromática", "cat": "Casa", "preco": 9.5, "imagem": "img/vela.svg"},
-  {"nome": "Planta suculenta", "cat": "Casa", "preco": 7.0, "imagem": "img/planta.svg"},
-  {"nome": "Caderno A5", "cat": "Papelaria", "preco": 6.5, "imagem": "img/caderno.svg"},
-  {"nome": "Conjunto de canetas", "cat": "Papelaria", "preco": 8.9, "imagem": "img/canetas.svg"},
-  {"nome": "Tote bag", "cat": "Acessórios", "preco": 14.0, "imagem": "img/tote-bag.svg"},
-  {"nome": "Porta-chaves", "cat": "Acessórios", "preco": 4.5, "imagem": "img/porta-chaves.svg"},
-  {"nome": "Meias às riscas", "cat": "Acessórios", "preco": 5.9, "imagem": "img/meias.svg"}
+  {"nome": "Caneca de cerâmica", "cat": "Casa", "imagem": "img/caneca.svg", "desc": "Caneca feita à mão, ideal para o café ou chá da manhã."},
+  {"nome": "Vela aromática", "cat": "Casa", "imagem": "img/vela.svg", "desc": "Vela de cera natural com aroma suave e duradouro."},
+  {"nome": "Planta suculenta", "cat": "Casa", "imagem": "img/planta.svg", "desc": "Pequena suculenta de fácil manutenção, em vaso decorativo."},
+  {"nome": "Caderno A5", "cat": "Papelaria", "imagem": "img/caderno.svg", "desc": "Caderno A5 de capa dura com folhas pautadas."},
+  {"nome": "Conjunto de canetas", "cat": "Papelaria", "imagem": "img/canetas.svg", "desc": "Conjunto de canetas de escrita suave em várias cores."},
+  {"nome": "Tote bag", "cat": "Acessórios", "imagem": "img/tote-bag.svg", "desc": "Saco de algodão resistente para o dia a dia."},
+  {"nome": "Porta-chaves", "cat": "Acessórios", "imagem": "img/porta-chaves.svg", "desc": "Porta-chaves personalizado, leve e prático."},
+  {"nome": "Meias às riscas", "cat": "Acessórios", "imagem": "img/meias.svg", "desc": "Meias de algodão confortáveis com padrão às riscas."}
 ]
