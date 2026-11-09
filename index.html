@@ -24,8 +24,10 @@ function render(){
     `<button data-category="${c}" aria-pressed="${c===current}">${c}</button>`).join("");
   const items=products.filter(p=>current===ALL||p.category===current);
   const pages=Math.ceil(items.length/PER_PAGE);
-  document.getElementById("pager").innerHTML=pages>1?Array.from({length:pages},(_,i)=>
-    `<button data-page="${i+1}" aria-pressed="${i+1===page}">${i+1}</button>`).join(""):"";
+  const shown=[...new Set([1,page-1,page,page+1,pages])].filter(n=>n>=1&&n<=pages).sort((a,b)=>a-b);
+  const btn=(n,label,off)=>`<button data-page="${n}" aria-pressed="${n===page&&!label}"${off?" disabled":""}>${label||n}</button>`;
+  document.getElementById("pager").innerHTML=pages>1?btn(page-1,"‹",page===1)+shown.map((n,i)=>
+    (i&&n-shown[i-1]>1?"<span>…</span>":"")+btn(n)).join("")+btn(page+1,"›",page===pages):"";
   document.getElementById("grid").innerHTML=items.slice((page-1)*PER_PAGE,page*PER_PAGE).map(p=>`
     <article class="card" data-name="${p.name}" tabindex="0" role="button">
       <img class="thumb" src="${p.image}" alt="${p.name}" loading="lazy">      
