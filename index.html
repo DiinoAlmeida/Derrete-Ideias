@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catálogo de exemplo</title>
+<style>
+:root{--bg:#faf8f5;--surface:#fff;--text:#1f1d1a;--muted:#6b665f;--border:#e6e1d9;--accent:#c2410c;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171513;--surface:#211e1b;--text:#f2eee8;--muted:#a39d94;--border:#34302b;--accent:#fb923c}}
+:root[data-theme="dark"]{--bg:#171513;--surface:#211e1b;--text:#f2eee8;--muted:#a39d94;--border:#34302b;--accent:#fb923c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+header{padding:2.5rem 1.25rem 1rem;max-width:960px;margin:0 auto}
+h1{margin:0 0 .25rem;font-size:1.8rem}
+header p{margin:0;color:var(--muted)}
+nav{display:flex;gap:.5rem;flex-wrap:wrap;max-width:960px;margin:0 auto;padding:.5rem 1.25rem 1rem}
+nav button{border:1px solid var(--border);background:var(--surface);color:var(--text);padding:.4rem .9rem;border-radius:999px;font:inherit;cursor:pointer}
+nav button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+main{max-width:960px;margin:0 auto;padding:0 1.25rem 2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--border)}
+.info{padding:.9rem;display:flex;flex-direction:column;gap:.25rem;flex:1}
+.info h3{margin:0;font-size:1rem}
+.info small{color:var(--muted)}
+.price{font-weight:700;color:var(--accent);margin-top:auto;padding-top:.5rem}
+.info a{margin-top:.5rem;text-align:center;border:1px solid var(--border);border-radius:8px;padding:.4rem;color:var(--text);text-decoration:none;font-size:.9rem}
+.card{cursor:pointer}.card:hover{border-color:var(--accent)}
+dialog{border:1px solid var(--border);border-radius:16px;padding:0;max-width:340px;width:calc(100% - 2.5rem);background:var(--surface);color:var(--text)}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+.dlg .thumb{aspect-ratio:16/10}
+.dlg .corpo{padding:1.1rem;display:flex;flex-direction:column;gap:.4rem}
+.dlg h2{margin:0;font-size:1.25rem}
+.btn-ig{display:block;text-align:center;background:var(--accent);color:#fff;text-decoration:none;padding:.7rem;border-radius:10px;font-weight:600;margin-top:.6rem}
+.btn-mail{display:block;text-align:center;border:1px solid var(--accent);color:var(--accent);text-decoration:none;padding:.7rem;border-radius:10px;font-weight:600}
+.fechar{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:.4rem}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:1.5rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>Derrete Ideias</h1>
+</header>
+<nav id="filtros" aria-label="Categorias"></nav>
+<main><div class="grid" id="grid"></div></main>
+<dialog id="detalhe"><div class="dlg" id="dlg"></div></dialog>
+<footer>© 2026 Derrete Ideias · Para encomendas, contacte-nos por email ou instagram.</footer>
+<script>
+let produtos=[], cats=["Todos"];
+let atual="Todos";
+const fmt=n=>n.toFixed(2).replace(".",",")+" €";
+function render(){
+  document.getElementById("filtros").innerHTML=cats.map(c=>
+    `<button data-c="${c}" aria-pressed="${c===atual}">${c}</button>`).join("");
+  document.getElementById("grid").innerHTML=produtos
+    .filter(p=>atual==="Todos"||p.cat===atual).map(p=>`
+    <article class="card" data-n="${p.nome}" tabindex="0" role="button">
+      <img class="thumb" src="${p.imagem}" alt="${p.nome}" loading="lazy">      
+      <div class="info">
+        <h3>${p.nome}</h3><small>${p.cat}</small>
+        <div class="price">${fmt(p.preco)}</div>
+        <small>Ver detalhes →</small>
+      </div>
+    </article>`).join("");
+}
+const INSTA="https://www.instagram.com/derreteideias/"; // troca pelo teu perfil
+const EMAIL="derreteideias@gmail.com"; // troca pelo teu email
+const dlg=document.getElementById("detalhe");
+function abrir(n){
+  const p=produtos.find(x=>x.nome===n); if(!p)return;
+  document.getElementById("dlg").innerHTML=`
+    <img class="thumb" src="${p.imagem}" alt="${p.nome}">
+    <div class="corpo">
+      <h2>${p.nome}</h2><small>${p.cat}</small>
+      <div class="price">${fmt(p.preco)}</div>
+      <a class="btn-ig" href="${INSTA}" target="_blank" rel="noopener">Ver no Instagram</a>
+      <a class="btn-mail" href="mailto:${EMAIL}?subject=${encodeURIComponent("Pedido: "+p.nome)}&body=${encodeURIComponent("Olá! Tenho interesse em: "+p.nome)}">Enviar email</a>
+      <button class="fechar" onclick="dlg.close()">Fechar</button>
+    </div>`;
+  dlg.showModal();
+}
+const gridEl=document.getElementById("grid");
+gridEl.addEventListener("click",e=>{const c=e.target.closest(".card"); if(c)abrir(c.dataset.n);});
+gridEl.addEventListener("keydown",e=>{if(e.key==="Enter"){const c=e.target.closest(".card"); if(c)abrir(c.dataset.n);}});
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close();});
+document.getElementById("filtros").addEventListener("click",e=>{
+  const c=e.target.dataset.c; if(c){atual=c;render();}
+});
+fetch("produtos.json")
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(data => {
+    produtos = data;
+    cats = ["Todos", ...new Set(data.map(p => p.cat))];
+    render();
+  })
+  .catch(() => {
+    document.getElementById("grid").innerHTML =
+      "<p>Não foi possível carregar os produtos.</p>";
+  });
+</script>
+</body>
+</html>
