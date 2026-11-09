@@ -11,18 +11,22 @@
   <div class="brand"><img src="logo-icon.svg" alt="Logotipo"><div><h1>Derrete Ideias</h1><p>IMPRESSÃO 3D</p></div></div>
 </header>
 <nav id="filters" aria-label="Categorias"></nav>
-<main><div class="grid" id="grid"></div></main>
+<main><div class="grid" id="grid"></div><nav id="pager" aria-label="Páginas"></nav></main>
 <dialog id="detail"><div class="dlg" id="dlg"></div></dialog>
 <footer>© 2026 Derrete Ideias · Para encomendas, contacte-nos por email ou instagram. <a id="mail" class="ig" aria-label="Email"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a> <a id="ig" class="ig" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></footer>
 <script>
 const ALL="Todos";
 let products=[], categories=[ALL];
-let current=ALL;
+let current=ALL, page=1;
+const PER_PAGE=8;
 function render(){
   document.getElementById("filters").innerHTML=categories.map(c=>
     `<button data-category="${c}" aria-pressed="${c===current}">${c}</button>`).join("");
-  document.getElementById("grid").innerHTML=products
-    .filter(p=>current===ALL||p.category===current).map(p=>`
+  const items=products.filter(p=>current===ALL||p.category===current);
+  const pages=Math.ceil(items.length/PER_PAGE);
+  document.getElementById("pager").innerHTML=pages>1?Array.from({length:pages},(_,i)=>
+    `<button data-page="${i+1}" aria-pressed="${i+1===page}">${i+1}</button>`).join(""):"";
+  document.getElementById("grid").innerHTML=items.slice((page-1)*PER_PAGE,page*PER_PAGE).map(p=>`
     <article class="card" data-name="${p.name}" tabindex="0" role="button">
       <img class="thumb" src="${p.image}" alt="${p.name}" loading="lazy">      
       <div class="info">
@@ -36,7 +40,7 @@ const EMAIL="derreteideias@gmail.com"; // troca pelo teu email
 document.getElementById("ig").href=INSTAGRAM;
 document.getElementById("mail").href="mailto:"+EMAIL;
 const dlg=document.getElementById("detail");
-function open(n){
+function showDetail(n){
   const p=products.find(x=>x.name===n); if(!p)return;
   document.getElementById("dlg").innerHTML=`
     <img class="thumb" src="${p.image}" alt="${p.name}">
@@ -50,11 +54,14 @@ function open(n){
   dlg.showModal();
 }
 const gridEl=document.getElementById("grid");
-gridEl.addEventListener("click",e=>{const c=e.target.closest(".card"); if(c)open(c.dataset.name);});
-gridEl.addEventListener("keydown",e=>{if(e.key==="Enter"){const c=e.target.closest(".card"); if(c)open(c.dataset.name);}});
+gridEl.addEventListener("click",e=>{const c=e.target.closest(".card"); if(c)showDetail(c.dataset.name);});
+gridEl.addEventListener("keydown",e=>{if(e.key==="Enter"){const c=e.target.closest(".card"); if(c)showDetail(c.dataset.name);}});
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close();});
+document.getElementById("pager").addEventListener("click",e=>{
+  const n=+e.target.dataset.page; if(n){page=n;render();scrollTo({top:0,behavior:"smooth"});}
+});
 document.getElementById("filters").addEventListener("click",e=>{
-  const c=e.target.dataset.category; if(c){current=c;render();}
+  const c=e.target.dataset.category; if(c){current=c;page=1;render();}
 });
 fetch("products.json")
   .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
@@ -65,7 +72,7 @@ fetch("products.json")
   })
   .catch(() => {
     document.getElementById("grid").innerHTML =
-      "<p>Não foi possível carregar os products.</p>";
+      "<p>Não foi possível carregar os produtos.</p>";
   });
 </script>
 </body>
