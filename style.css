@@ -14,16 +14,16 @@ nav button[aria-pressed="true"]{background:var(--accent);border-color:var(--acce
 main{max-width:960px;margin:0 auto;padding:0 1.25rem 2rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.thumb{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--border)}
+.thumb{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:var(--border)}
 .info{padding:.9rem;display:flex;flex-direction:column;gap:.25rem;flex:1}
 .info h3{margin:0;font-size:1rem}
 .info small{color:var(--muted)}
-.description{margin:.25rem 0 0;color:var(--muted);font-size:.9rem}.info small:last-child{margin-top:auto;padding-top:.5rem}
+.description{margin:.25rem 0 0;color:var(--muted);font-size:.9rem;white-space:pre-line}.info small:last-child{margin-top:auto;padding-top:.5rem}
 .info a{margin-top:.5rem;text-align:center;border:1px solid var(--border);border-radius:8px;padding:.4rem;color:var(--text);text-decoration:none;font-size:.9rem}
 .card{cursor:pointer}.card:hover{border-color:var(--accent)}
 dialog{border:1px solid var(--border);border-radius:16px;padding:0;max-width:340px;width:calc(100% - 2.5rem);background:var(--surface);color:var(--text)}
 dialog::backdrop{background:rgba(0,0,0,.5)}
-.dlg .thumb{aspect-ratio:16/10}
+.dlg .thumb{aspect-ratio:4/5}
 .dlg .body{padding:1.1rem;display:flex;flex-direction:column;gap:.4rem}
 .dlg h2{margin:0;font-size:1.25rem}
 .btn-instagram{display:block;text-align:center;background:var(--accent);color:var(--on-accent);text-decoration:none;padding:.7rem;border-radius:10px;font-weight:600;margin-top:.6rem}
@@ -35,3 +35,8 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:1.5rem}
 #pager{justify-content:center;max-width:none;padding:1.5rem 0 0}
 #pager button:disabled{opacity:.4;cursor:default}
 #pager span{align-self:center;color:var(--muted)}
+.slider{position:relative}
+.slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.slides .thumb{flex:0 0 100%;scroll-snap-align:center}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);width:2.5rem;height:2.5rem;border:0;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:1.6rem;cursor:pointer}
+.prev{left:.5rem}.next{right:.5rem}

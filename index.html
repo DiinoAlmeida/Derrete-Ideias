@@ -42,10 +42,14 @@ const EMAIL="derreteideias@gmail.com"; // troca pelo teu email
 document.getElementById("ig").href=INSTAGRAM;
 document.getElementById("mail").href="mailto:"+EMAIL;
 const dlg=document.getElementById("detail");
+const slide=(b,d)=>{const s=b.parentNode.querySelector(".slides");s.scrollBy({left:d*s.clientWidth,behavior:"smooth"});};
 function showDetail(n){
   const p=products.find(x=>x.name===n); if(!p)return;
   document.getElementById("dlg").innerHTML=`
-    <img class="thumb" src="${p.image}" alt="${p.name}">
+    <div class="slider">
+      <div class="slides">${(p.images||[p.image]).map(i=>`<img class="thumb" src="${i}" alt="${p.name}">`).join("")}</div>
+      ${p.images?.length>1?`<button class="arrow prev" aria-label="Anterior" onclick="slide(this,-1)">‹</button><button class="arrow next" aria-label="Seguinte" onclick="slide(this,1)">›</button>`:""}
+    </div>
     <div class="body">
       <h2>${p.name}</h2><small>${p.category}</small>
       <p class="description">${p.description}</p>
